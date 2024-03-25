@@ -1,0 +1,5 @@
+Mon Mar 25 23:24:06 UTC 2024
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root                 4.9G      2.3G      2.6G  47% /
+vendor_id	: AuthenticX86
+33
