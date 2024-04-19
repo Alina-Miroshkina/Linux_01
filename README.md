@@ -1,2 +1,3 @@
-# Linux_01
+# Linux
+
 homework 01 Linux
