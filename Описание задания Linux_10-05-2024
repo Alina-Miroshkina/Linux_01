@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Создаем переменную с фамилией и помещаем туда имя
+LASTNAME="Miroshkina"
+FIRSTNAME="Alina"
+FULLNAME="$LASTNAME=$FIRSTNAME"
+
+# Создаем файл скрипта в рабочей папке
+touch myscript.sh
+
+# Наполняем скрипт командами
+echo '#!/bin/bash' > myscript.sh
+echo "" >> myscript.sh
+
+# 1. Создаем подпапку test в рабочей папке на сервере
+echo "mkdir test" >> myscript.sh
+
+# 2. Дописываем в файл myfile.txt слова "Let's GO"
+echo 'echo "Let’s GO" > test/myfile.txt' >> myscript.sh
+
+# 3. Дописываем в myfile.txt вывод из файла /var/spool/mail/ec2-user, только строки с 'cron'
+echo 'grep "cron" /var/spool/mail/ec2-user >> test/myfile.txt' >> myscript.sh
+
+# 4. Создаем 3 подпапки DIR01, DIR02, DIR03 в папке test
+echo "mkdir test/DIR01 test/DIR02 test/DIR03" >> myscript.sh
+
+# 5. В папку DIR01 помещаем пустой файл 1.txt
+echo 'touch test/DIR01/1.txt' >> myscript.sh
+
+# 6. В папку DIR02 помещаем файл с информацией о всех процессах
+echo 'ps -ef > test/DIR02/processes.txt' >> myscript.sh
+
+# 7. В папку DIR03 помещаем слово “DONE”
+echo 'echo "DONE" > test/DIR03/done.txt' >> myscript.sh
+
+# 8. Дозаписываем в myfile.txt содержимое переменной
+echo "echo $FULLNAME >> test/myfile.txt" >> myscript.sh
+
+# Даем права на выполнение скрипта
+chmod +x myscript.sh
+
+# Выполнение скрипта
+./myscript.sh
